@@ -1,6 +1,6 @@
-
 import { PieceAuth, Property, createPiece } from '@activepieces/pieces-framework';
 import { newTicketInView } from './lib/trigger/new-ticket-in-view';
+import { respondToTicketAction } from './lib/actions/respond-to-ticket';
 
 const markdownProperty = `
 **Organization**: The organization name can be found in the URL (e.g https://ORGANIZATION_NAME.zendesk.com).
@@ -11,7 +11,6 @@ const markdownProperty = `
 `
 
 export const zendeskAuth = PieceAuth.CustomAuth({
-  
   description: markdownProperty,
   props: {
       email: Property.ShortText({
@@ -35,13 +34,14 @@ export const zendeskAuth = PieceAuth.CustomAuth({
 
 export const zendesk = createPiece({
   displayName: 'Zendesk',
-      minimumSupportedRelease: '0.5.0',
-    logoUrl: 'https://cdn.activepieces.com/pieces/zendesk.png',
+  minimumSupportedRelease: '0.5.0',
+  logoUrl: 'https://cdn.activepieces.com/pieces/zendesk.png',
   authors: [
     "abuaboud"
   ],
   auth: zendeskAuth,
   actions: [
+    respondToTicketAction
   ],
   triggers: [
     newTicketInView
